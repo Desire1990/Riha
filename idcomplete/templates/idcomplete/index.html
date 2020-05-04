@@ -1,0 +1,82 @@
+{% extends 'base.html'%}
+{% block content %}
+
+
+	
+<div >
+	<h2 id="Title">ATTESTATION D'IDENTITE COMPLETE  Numero {{ id.attestionId }}</h2>
+	<p id="para">
+		Je soussigne <strong>{{id.zone.chefZoneLeader}} </strong>Chef de Zone<strong> {{id.zone }}</strong>, atteste par la 
+		presente que l'identite complete de Monsieur <strong> {{ id.Person.Nom }} {{id.Person.Prenom}}</strong>, est le suivant: <br>
+	</p>
+	<div class="identite">
+	<table>
+	   <tr>
+	       <td>NOM </td>
+	       <td> : </td>
+	       <td>{{id.Person.Nom}}</td>
+	   </tr><tr>
+	       <td>prenom</td>
+	       <td> : </td>
+	       <td>{{id.Person.Prenom}}</td>
+	   </tr><tr>
+	       <td>NOM DU PERE</td>
+	       <td> :</td>
+	       <td>{{id.Person.NomPere}}</td>
+	   </tr>
+	   <tr>
+	       <td>NOM DE LA MERE </td>
+	       <td> :</td>
+	       <td>{{id.Person.NomMere}}</td>
+	   </tr>
+
+	   <tr>
+	       <td>lieu et date de naissance</td>
+	       <td> :</td>
+	       <td>{{id.Person.colline}},{{id.Person.anneeDeNaissance }}</td>
+	   </tr>	
+
+	   <tr>
+	       <td>commune </td>
+	       <td> :</td>
+	       <td>{{id.Person.commune_natal}}</td>
+	   </tr>
+
+	   <tr>
+	       <td>province </td>
+	       <td> :</td>
+	       <td>{{id.Person.province_natal}}</td>
+	   </tr>
+
+	   <tr>
+	       <td>Nationalite </td>
+	       <td> :</td>
+	       <td>{{id.Person.nationalite}}</td>
+	   </tr>
+
+	   <tr>
+	       <td>ETAT-CIVIL</td>
+	       <td> : </td>
+	       <td>{{id.Person.etatCivil}}</td>
+	   </tr>
+	
+	   <tr>
+	       <td>PROFESSION </td>
+	       <td> :</td>
+	       <td>{{id.Person.profession}}</td>
+	   </tr>
+
+	   <tr>
+	       <td>RESIDENCE ACTUELLE </td>
+	       <td> :</td>
+	       <td>Zone {{ id.zone}},  Q. {{id.quarter}}</td>
+	   </tr>
+	</table>
+		
+	</div>
+	<p>
+		La présente attestation lui est délivrée au vu de sa Carte  Nationale d’Identité  portant  numéro {{id.Person.numberId}}  délivrée  à {{id.Person.commune_natal }},  {{id.Person.date_delivrated }}.
+	</p><br>
+
+
+{% endblock %}

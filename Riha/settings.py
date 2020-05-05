@@ -124,13 +124,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
 STATIC_URL = '/static/'
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+MEDIA_URL ='image/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, "image")
-LOGIN_REDIRECT_URL = '/backoffice/'
-LOGIN_URL = '/'
-# for backend party
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

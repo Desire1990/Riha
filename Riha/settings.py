@@ -129,7 +129,7 @@ STATIC_URL = '/static/'
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "image")
 LOGIN_REDIRECT_URL = '/backoffice/'
 LOGIN_URL = '/'
 # for backend party

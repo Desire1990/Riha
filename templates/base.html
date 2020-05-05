@@ -1,64 +1,103 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Riha</title>
-	<style type="text/css">
-		hr{
-			color: red;
-		}
-		h2{
-			text-transform: uppercase;			
-		}
-		#Title{
-			text-transform: uppercase;
-			text-align: center;
-		}
-		.identite{
-		text-align: left;
-		text-decoration: none;
-		text-transform: uppercase;
-		}
-		.footer{
-			float: right;
-			margin: 5px;
-			text-transform: uppercase;
-			text-align: center;
-		/*}
-		.number{
-			text-align: center;
-			background-color: #22EE22;
-			text-transform: uppercase;
-			text-decoration: blink;
-		}*/
-</style>
-</head>
-<body>
-	<div>
-		<div class="id">
-			<h2>
-				REPUBLIQUE DU BURUNDI <br>
-				MINISTERE DE L'INTERIEUR <br>
-				ET DE LA FORMATION PATRIOTIQUE <br>
-				ET DE DEVELOPPEMENT LOCAL <br>
-				MUNICIPALITE DE {{id.province}} <br>
-				COMMUNE URBAINE DE {{id.commune}}<br>
-				ZONE DE {{id.zone}}
-			</h2>
-		</div><br><br><br>
-		<div>	
-			{% block content %} {% endblock %}
-		</div>
-		<div class="footer">
-			<h2>
-				Fait a Bujumbura ,<br> {{id.date}} <br>
-				LE CHEF DE ZONE {{id.zone}} <br>
-				{{id.zone.chefZoneLeader}}<br><br>
-			</h2>
-		</div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-	
-</body>
+    <title>Riha</title>
+    <style type="text/css">
+      hr{
+        color: red;
+      }
+      h2{
+        text-transform: uppercase;      
+      }
+      #Title{
+        text-transform: uppercase;
+        text-align: center;
+      }
+      .identite{
+      text-align: left;
+      text-decoration: none;
+      text-transform: uppercase;
+      }
+      .footer{
+        float: right;
+        margin: 5px;
+        text-transform: uppercase;
+        text-align: center;
+      /*}
+      .number{
+        text-align: center;
+        background-color: #22EE22;
+        text-transform: uppercase;
+        text-decoration: blink;
+      }*/
+    </style>
+
+  </head>
+  <body>
+  <!-- <nav class="navbar navbar-expend-md navbar-light bg-light sticky-top"> -->
+  <!-- <div class="container-fluid"> -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'home' %}" class = 'navbar-link btn-lg' style="background-color:#FFCC33; color:#000000;">RIHA</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">        
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}" class = 'navbar-link btn-lg' style="background-color:#FFCC33; color:#000000;">LOGOUT</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'edit_profile' %}" "class = 'navbar-link btn-lg' style="background-color:#FFCC33; color:#000000;">PROFILE</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'createIdc' %}" class = 'navbar-link btn-lg' style="background-color:#FFCC33; color:#000000;">IDENTITE COMPLETE</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}" class = 'navbar-link btn-lg' style="background-color:#FFCC33; color:#000000;">LOGIN</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}" class = 'navbar-link btn-lg' style="background-color:#FFCC33; color:#000000;">REGISTER</a>
+          </li>
+
+        {% endif %}
+        
+      </ul>
+      
+    </div>
+    </nav>
+    <div>
+      
+      <div class="container">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-warning alert-dismissable" role="alert">
+              <button class="close" data-dismiss="alert">
+                      <small><sup>close</sup></small>
+                  </button>
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+      </div>
+       
+
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
 </html>
-
-

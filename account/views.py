@@ -3,9 +3,32 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib import messages 
 from .forms import SignUpForm, ProfilForm
+from idcomplete.models import*
+from django.contrib.auth.decorators import login_required
+
+
 
 def home(request):
-	return render(request, 'account/home.html', {})
+	identites = IdentiteComplete.objects.all()
+	return render(request, 'account/home.html', {'identites':identites})
+
+
+@login_required
+def profile(request):
+	if request.method == 'POST':
+		form = ProfilForm(request.POST)
+		if form.is_valid():
+			identite = form.save(commit=False)
+			identite.save()
+			messages.success(request, ('You Have created Your Profile...'))
+			return redirect('home')
+	else:
+		form = ProfilForm(instance=request.user)
+	
+	context = {'form': form}
+	return render(request, 'account/profile.html', context)
+
+
 
 def login_user(request):
 	if request.method == 'POST':
@@ -37,7 +60,7 @@ def register_user(request):
 			password = form.cleaned_data['password1']
 			user = authenticate(username=username, password=password)
 			login(request, user)
-			messages.success(request, ('<h1>You Have Been Registered...</h1>'))
+			messages.success(request, ('You Have Been Registered...'))
 			return redirect('home')
 	else:
 		form = SignUpForm()
@@ -47,19 +70,7 @@ def register_user(request):
 
 
 
-def profile(request):
-	if request.method == 'POST':
-		form = ProfilForm(request.POST)
-		if form.is_valid():
-			identite = form.save(commit=False)
-			identite.save()
-			messages.success(request, ('You Have created Your Profile...'))
-			return redirect('home')
-	else:
-		form = ProfilForm(instance=request.user)
-	
-	context = {'form': form}
-	return render(request, 'account/profile.html', context)
+
 
 def change_password(request):
 	if request.method == 'POST':

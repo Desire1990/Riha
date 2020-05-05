@@ -1,4 +1,4 @@
-{% extends 'base1.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
 		{% csrf_token %}
 		{% if form.errors %}
         <button class="close" data-dismiss="alert">
-          <small><sup>x</sup></small>
+          <small><sup>close</sup></small>
         </button>
         <p>Your Form Has Errors...</p>
               {% for field in form %}

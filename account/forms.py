@@ -3,13 +3,6 @@ from django.contrib.auth.models import User
 from django import forms
 from .models import*
 
-class ProfilForm(forms.ModelForm):
-# class ProfilForm(UserChangeForm):
-	# password = forms.CharField(label="",  widget=forms.TextInput(attrs={'type':'hidden'}))
-	class Meta:
-		model = Person
-		fields = '__all__'#('username', 'first_name', 'last_name', 'email', 'password',)
-
 
 class SignUpForm(UserCreationForm):
 	email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}), )
@@ -40,8 +33,32 @@ class SignUpForm(UserCreationForm):
 	    self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
 
 
-# class ProfilForm(forms.ModelForm):
-
-#     class Meta:
-#         model = Person
-#         fields = '__all__'
+class PersonForm(forms.ModelForm):
+	slug  = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'slug'}))
+	NomPere = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nom du pere'}))
+	NomMere = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nom de la mere'}))
+	colline = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'colline'}))
+	commune_natal = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'commune de naissance'}))
+	province_natal = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'province de naissance'}))
+	anneeDeNaissance = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'votre annee de naissance '}))
+	nationalite = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'nationalite '}))
+	etatCivil = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Etat Civil'}))
+	profession = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'profession'}))
+	numberId = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'numberId'}))
+	date_delivrated = forms.CharField(label="", max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'date_delivrated'}))
+	
+	class Meta:
+		model = Person
+		fields = ('avatar',
+					'slug',
+					 'NomPere', 
+					 'NomMere', 
+					 'colline', 
+					 'commune_natal', 
+					 'province_natal', 
+					 'anneeDeNaissance', 
+					 'nationalite', 
+					 'etatCivil', 
+					 'profession', 
+					 'numberId',
+					 'date_delivrated')

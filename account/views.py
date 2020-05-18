@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib import messages 
-from .forms import SignUpForm, ProfilForm
+from .forms import SignUpForm, PersonForm
 from idcomplete.models import*
 from django.contrib.auth.decorators import login_required
 
@@ -16,14 +16,15 @@ def home(request):
 @login_required
 def profile(request):
 	if request.method == 'POST':
-		form = ProfilForm(request.POST)
+		form = PersonForm(request.POST)
 		if form.is_valid():
 			identite = form.save(commit=False)
+			identite.user = request.user
 			identite.save()
 			messages.success(request, ('You Have created Your Profile...'))
 			return redirect('home')
 	else:
-		form = ProfilForm(instance=request.user)
+		form = PersonForm(instance=request.user)
 	
 	context = {'form': form}
 	return render(request, 'account/profile.html', context)

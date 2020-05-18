@@ -4,19 +4,29 @@
 <div class="display-4" style="background-color:#FFFFFF;color:#000000;">
   
   {% if user.is_authenticated %}
-    	<P >welcome <br>This is the home page</p>
+    	<P >welcome {{ user.first_name }}<br>
+      This is the home page reserved for you</p>
   		<p>Name: {{ user.first_name }} {{ user.last_name }}</p>
   		<p>Username: {{ user.username}}</p>
   		<p>Email: {{ user.email }}</p>
-  	
-   {% else %}
-   
-	   <ol>
-	   <p>These are all identities we have in our db</p>
-	  		{% for id in identites %}
-		   		<li>{{id.Person}} <a href="idcomplete/{{id.pk}}" class="btn btn-success">view idc</a> </li> 
-		    {% endfor %}
-		</ol>
+
+      {% else %}
+      <center>
+        <div>
+         <p>
+          <h1>Welcome on Riha application</h1>
+      
+            <p>To create your complete identity in 3 point:</p>
+            <div>
+              <ul>
+                <li>First register yourself and logged in, </li>
+                <li>Secondly create your profile, and then </li>
+                <li> Create your complete identity</li>
+              </ul>
+          </div>
+          </p>
+        </div>
+      </center>
    {% endif %}
 </div>
 

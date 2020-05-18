@@ -5,10 +5,14 @@ from .models import *
 from .forms import *
 from django.contrib.auth.decorators import login_required
 
-
-def home_view(request, pk, template_name = 'idcomplete/index.html'):
-	id    =   get_object_or_404(IdentiteComplete, pk = pk)
-	return render(request, template_name, {'id': id })
+@login_required
+def home_view(request,slug, template_name = 'idcomplete/index.html'):
+    identite   =get_object_or_404(IdentiteComplete,slug=slug)
+    persone   =  get_object_or_404(Person, slug=slug )
+    identite.user = request.user
+    persone.user = request.user
+    return render(request, template_name, {'identite': identite,
+                                            'persone':persone })
 
 
 @login_required
@@ -16,11 +20,13 @@ def createIdc(request):
     if request.method == "POST":
         form = IdentiteCompleteForm(request.POST)
         if form.is_valid():
-            identite = form.save(commit=False)
-            identite.author = request.user
-            identite.save()
-            return redirect('http://127.0.0.1:8000')
+            id_compl= form.save(commit=False)
+            id_compl.user = request.user
+            id_compl.save()
+            return redirect('home')
     else:
         form = IdentiteCompleteForm()
     return render(request, 'account/form.html', {'form': form})
+
+
 

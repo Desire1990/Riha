@@ -2,7 +2,7 @@
 {% block content %}
 
 
-	
+{% if user.is_authenticated %}	
 <div >
 	<div>
 		<div class="id">
@@ -11,9 +11,9 @@
 			MINISTERE DE L'INTERIEUR <br>
 			ET DE LA FORMATION PATRIOTIQUE <br>
 			ET DE DEVELOPPEMENT LOCAL <br>
-			MUNICIPALITE DE {{id.province}} <br>
-			COMMUNE URBAINE DE {{id.commune}}<br>
-			ZONE DE {{id.zone}}
+			MUNICIPALITE DE {{identite.province}} <br>
+			COMMUNE URBAINE DE {{identite.commune}}<br>
+			ZONE DE {{identite.zone}}
 		</h2>
 		</div>
 		<br><br><br>
@@ -21,10 +21,10 @@
 		<div>	
 
 
-			<h2 id="Title">ATTESTATION D'IDENTITE COMPLETE  Numero {{ id.attestionId }}</h2>
+			<h2 id="Title">ATTESTATION D'IDENTITE COMPLETE  Numero .........</h2>
 			<p id="para">
-				Je soussigne <strong>{{id.zone.chefZoneLeader}} </strong>Chef de Zone<strong> {{id.zone }}</strong>, atteste par la 
-				presente que l'identite complete de Monsieur <strong> {{ id.Person.Nom }} {{id.Person.Prenom}}</strong>, est le suivant: <br>
+				Je soussigne <strong>{{identite.zone.chefZoneLeader}} </strong>Chef de Zone<strong> {{identite.zone }}</strong>, atteste par la 
+				presente que l'identite complete de Monsieur <strong> {{user.last_name}} {{user.first_name}}</strong>, est le suivant: <br>
 			</p>
 		</div>
 		<div class="identite">
@@ -32,76 +32,76 @@
 		   <tr>
 		       <td>NOM </td>
 		       <td> : </td>
-		       <td>{{id.Person.Nom}}</td>
+		       <td>{{user.last_name}}</td>
 		   </tr><tr>
 		       <td>prenom</td>
 		       <td> : </td>
-		       <td>{{id.Person.Prenom}}</td>
+		       <td>{{user.first_name}}</td>
 		   </tr><tr>
 		       <td>NOM DU PERE</td>
 		       <td> :</td>
-		       <td>{{id.Person.NomPere}}</td>
+		       <td>{{persone.NomPere}}</td>
 		   </tr>
 		   <tr>
 		       <td>NOM DE LA MERE </td>
 		       <td> :</td>
-		       <td>{{id.Person.NomMere}}</td>
+		       <td>{{persone.NomMere}}</td>
 		   </tr>
 
 		   <tr>
 		       <td>lieu et date de naissance</td>
 		       <td> :</td>
-		       <td>{{id.Person.colline}},{{id.Person.anneeDeNaissance }}</td>
+		       <td>{{persone.colline}},{{persone.anneeDeNaissance }}</td>
 		   </tr>	
 
 		   <tr>
 		       <td>commune </td>
 		       <td> :</td>
-		       <td>{{id.Person.commune_natal}}</td>
+		       <td>{{persone.commune_natal}}</td>
 		   </tr>
 
 		   <tr>
 		       <td>province </td>
 		       <td> :</td>
-		       <td>{{id.Person.province_natal}}</td>
+		       <td>{{persone.province_natal}}</td>
 		   </tr>
 
 		   <tr>
 		       <td>Nationalite </td>
 		       <td> :</td>
-		       <td>{{id.Person.nationalite}}</td>
+		       <td>{{persone.nationalite}}</td>
 		   </tr>
 
 		   <tr>
 		       <td>ETAT-CIVIL</td>
 		       <td> : </td>
-		       <td>{{id.Person.etatCivil}}</td>
+		       <td>{{persone.etatCivil}}</td>
 		   </tr>
 		
 		   <tr>
 		       <td>PROFESSION </td>
 		       <td> :</td>
-		       <td>{{id.Person.profession}}</td>
+		       <td>{{persone.profession}}</td>
 		   </tr>
 
 		   <tr>
 		       <td>RESIDENCE ACTUELLE </td>
 		       <td> :</td>
-		       <td>Zone {{ id.zone}},  Q. {{id.quarter}}</td>
+		       <td>Zone {{ identite.zone}},  Q. {{identite.quarter}}</td>
 		   </tr>
 		</table>
 			
-		</div>
+		</div><br><br>
 		<p>
-			La présente attestation lui est délivrée au vu de sa Carte  Nationale d’Identité  portant  numéro {{id.Person.numberId}}  délivrée  à {{id.Person.commune_natal }},  {{id.Person.date_delivrated }}.
+			La présente attestation lui est délivrée au vu de sa Carte  Nationale d’Identité  portant  numéro {{persone.numberId}}  délivrée  à {{persone.commune_natal }},  {{persone.date_delivrated }}.
 		</p><br>
 		</div>
 		<div class="footer">
 			<h2>
-				Fait a Bujumbura ,<br> {{id.date}} <br>
-				LE CHEF DE ZONE {{id.zone}} <br>
-				{{id.zone.chefZoneLeader}}<br><br>
+				Fait a Bujumbura ,<br> {{identite.date}} <br>
+				LE CHEF DE ZONE {{identite.zone}} <br>
+				{{identite.zone.chefZoneLeader}}<br><br>
 			</h2>
 		</div>
-
+{% endif %}
 {% endblock %}
